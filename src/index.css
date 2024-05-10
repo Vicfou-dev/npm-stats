@@ -35,6 +35,11 @@ button:hover {
     margin-top: 20px;
 }
 
+button#shareLink:disabled {
+    background-color: gray;
+    cursor: not-allowed; 
+}
+
 #packageList li {
     margin: 10px 0;
     padding: 15px;

@@ -37,7 +37,9 @@ async function getDownloads(packageName) {
     return data.downloads;
 }
 
-usernameInput.addEventListener('input', () => shareLinkButton.disabled = !!usernameInput.value);
+const checkDisable = () => shareLinkButton.disabled = !usernameInput.value
+checkDisable();
+usernameInput.addEventListener('input', checkDisable);
 
 document.getElementById('shareLink').addEventListener('click', function() {
     var username = document.getElementById('username').value;
