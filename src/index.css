@@ -50,3 +50,17 @@ button:hover {
     color: #007BFF;
     border-top: 1px solid #ddd;
 }
+
+@media screen and (max-width: 768px) {
+    button {
+        padding: 8px 16px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
