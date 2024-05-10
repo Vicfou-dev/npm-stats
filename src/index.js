@@ -1,7 +1,15 @@
 document.getElementById('getPackages').addEventListener('click', getPackages);
 var usernameInput = document.getElementById('username');
-if (localStorage.getItem('username')) {
-    usernameInput.value = localStorage.getItem('username');
+
+var urlParams = new URLSearchParams(window.location.search);
+var shareLinkButton = document.getElementById('shareLink');
+var username = urlParams.get('username');
+if(!username && localStorage.getItem('username')) {
+    username = localStorage.getItem('username');
+}
+
+if (username) {
+    usernameInput.value = username;
     getPackages();
 }
 
@@ -28,3 +36,20 @@ async function getDownloads(packageName) {
     var data = await response.json();
     return data.downloads;
 }
+
+usernameInput.addEventListener('input', () => shareLinkButton.disabled = !!usernameInput.value);
+
+document.getElementById('shareLink').addEventListener('click', function() {
+    var username = document.getElementById('username').value;
+    if (!username) {
+        alert('Please enter a username first.');
+    }
+
+    const url = window.location.href.split('?')[0];
+    const link = url + '?username=' + username;
+    navigator.clipboard.writeText(link).then(function() {
+        alert('Link copied to clipboard!');
+    }).catch(function(error) {
+        console.error('Could not copy text: ', error);
+    });
+});
